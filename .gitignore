@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#Firebase Admin SDK
+note-craft-firebase-adminsdk-service-key.json
