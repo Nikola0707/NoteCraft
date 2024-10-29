@@ -40,7 +40,12 @@ function Sidebar() {
 
   // Before we do this we need to create an Automatic index settings and to add "Add exemption" in to firebase for that particular db.
   const [data, loading, error] = useCollection(
-    user && query(collectionGroup(db, "rooms"), where("userId", "==", user.id))
+    user?.emailAddresses?.[0]
+      ? query(
+          collectionGroup(db, "rooms"),
+          where("userId", "==", user.emailAddresses[0].toString())
+        )
+      : null
   );
 
   useEffect(() => {

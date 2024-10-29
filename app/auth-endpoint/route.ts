@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   // Execute the query and get the matching documents.
   const usersInRoom = await adminDb
     .collectionGroup("rooms")
-    .where("userId", "==", sessionClaims?.id)
+    .where("userId", "==", sessionClaims?.email)
     .get();
 
   // Find the specific document within the queried results where the document id matches the room id.

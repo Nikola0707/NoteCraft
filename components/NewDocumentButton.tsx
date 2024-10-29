@@ -12,13 +12,13 @@ function NewDocumentButton() {
     startTransition(async () => {
       // The docID is the document id that we are getting from firebase
       const { docId } = await createNewDocument();
-      router.push(`doc/${docId}`);
+      router.push(`/document/${docId}`);
     });
   };
 
   return (
     <Button onClick={handleCreateNewDocument} disabled={isPending}>
-      {isPending ? "Creating..." : "New Document"}
+      {isPending ? "Creating..." : "Create New Document"}
     </Button>
   );
 }

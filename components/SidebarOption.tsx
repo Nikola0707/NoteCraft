@@ -15,11 +15,11 @@ function SidebarOption({ href, id }: { href: string; id: string }) {
   return (
     <Link
       href={href}
-      className={`border p-2 rounded-md ${
+      className={`border p-2 rounded-md max-w-60 ${
         isActive ? "bg-gray-300 font-bold border-black" : "border-gray-400"
       }`}
     >
-      <p className="truncate">{data.title}</p>
+      <p className="truncate hover:text-clip">{data.title}</p>
     </Link>
   );
 }
