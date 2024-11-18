@@ -1,5 +1,9 @@
 "use client";
 
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useRoom } from "@liveblocks/react/suspense";
 import {
   Dialog,
   DialogContent,
@@ -9,34 +13,35 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState, useTransition } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { usePathname } from "next/navigation";
-import { useRoom } from "@liveblocks/react/suspense";
-import { useRouter } from "next/navigation";
 import { deleteDocument } from "@/actions/actions";
-import { toast } from "sonner";
 
-function DeleteDocument() {
+const DeleteDocument = () => {
   const room = useRoom();
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = async () => {
     const roomId = room.id;
     if (!roomId) return;
-    startTransition(async () => {
-      const { success } = await deleteDocument(roomId);
 
-      if (success) {
-        setIsOpen(false);
-        router.replace("/");
-        toast.success("Room Deleted successfully!");
-      } else {
-        toast.error("Failed to delete room!");
+    startTransition(async () => {
+      try {
+        const { success } = await deleteDocument(roomId);
+
+        if (success) {
+          setIsOpen(false);
+          router.replace("/");
+          toast.success("Room deleted successfully!");
+        } else {
+          toast.error("Failed to delete room. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error deleting room:", error);
+        toast.error("An unexpected error occurred. Please try again later.");
       }
     });
   };
@@ -49,7 +54,7 @@ function DeleteDocument() {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure you want to Delete?</DialogTitle>
+          <DialogTitle>Are you absolutely sure you want to delete?</DialogTitle>
           <DialogDescription>
             This action cannot be undone. This will permanently delete the
             document and all its contents, removing all users from the document.
@@ -73,5 +78,6 @@ function DeleteDocument() {
       </DialogContent>
     </Dialog>
   );
-}
+};
+
 export default DeleteDocument;

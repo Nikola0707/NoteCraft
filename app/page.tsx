@@ -4,14 +4,13 @@ import { db } from "@/firebase";
 import { useUser } from "@clerk/nextjs";
 import { DocumentData } from "firebase-admin/firestore";
 import { collectionGroup, query, where } from "firebase/firestore";
-import { ArrowLeftCircle } from "lucide-react";
 import { useEffect, useState, useCallback } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import NewDocumentButton from "@/components/NewDocumentButton";
-import DocumentTitle from "@/components/DocumentTitle";
 import DocumentCard from "@/components/DocumentCard";
 import EmptyDocumentMessage from "@/components/EmptyDocumentMessage";
 import TabSelector from "@/components/TabSelector";
+import DocumentsNotFound from "@/components/DocumentsNotFound";
 
 interface RoomDocument extends DocumentData {
   createdAt: string;
@@ -93,20 +92,15 @@ export default function Home() {
     }
 
     if (activeTab === "shared-with-me" && documentsToShow.length === 0) {
-      return (
-        <h1 className="font-bold text-xl">
-          No documents have been shared with you yet.
-        </h1>
-      );
+      return <DocumentsNotFound />;
     }
 
     return documentsToShow.map((document) => (
       <DocumentCard key={document.id} id={document.id} role={document.role} />
     ));
   }, [activeTab, groupedData]);
-
   return (
-    <main className="p-6">
+    <main className="p-6 h-full">
       {!hasDocuments ? (
         <EmptyDocumentMessage
           message="Get started with creating a New Document!"
@@ -119,7 +113,11 @@ export default function Home() {
 
           {/* Document List */}
           <div className="space-y-2">
-            {loading ? <p>Loading documents...</p> : renderDocuments()}
+            {loading ? (
+              <p>Loading documents...</p>
+            ) : (
+              <div className="flex gap-2">{renderDocuments()}</div>
+            )}
           </div>
         </div>
       )}

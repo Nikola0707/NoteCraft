@@ -77,10 +77,7 @@ export async function deleteDocument(roomId: string) {
 }
 
 export async function inviteUserToDocument(roomId: string, email: string) {
-  console.log("roomid", roomId);
-  console.log("email", email);
   auth().protect(); // Ensure the user is authenticated
-  console.log("inviteUserToDocument", roomId, email);
 
   try {
     await adminDb

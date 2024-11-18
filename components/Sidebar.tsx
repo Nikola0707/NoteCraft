@@ -100,22 +100,22 @@ function Sidebar() {
             ))}
           </>
         )}
+        {/* Shared with me */}
+        {groupedData.editor.length > 0 && (
+          <>
+            <h2 className="text-gray-500 font-semibold text-sm">
+              Documents Shared with Me
+            </h2>
+            {groupedData.editor.map((document) => (
+              <SidebarOption
+                key={document.id}
+                id={document.id}
+                href={`/document/${document.id}`}
+              />
+            ))}
+          </>
+        )}
       </div>
-      {/* Shared with me */}
-      {groupedData.editor.length > 0 && (
-        <>
-          <h2 className="text-gray-500 font-semibold text-sm">
-            Shared with Me
-          </h2>
-          {groupedData.editor.map((document) => (
-            <SidebarOption
-              key={document.id}
-              id={document.id}
-              href={`/document/${document.id}`}
-            />
-          ))}
-        </>
-      )}
     </>
   );
 

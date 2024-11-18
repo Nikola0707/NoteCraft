@@ -33,9 +33,8 @@ function InviteUser() {
     const roomId = pathname.split("/").pop();
     if (!roomId) return;
 
+    const { success } = await inviteUserToDocument(roomId, email);
     startTransition(async () => {
-      const { success } = await inviteUserToDocument(roomId, email);
-
       if (success) {
         setIsOpen(false);
         setEmail("");

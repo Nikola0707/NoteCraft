@@ -17,7 +17,7 @@ function DocumentTitle({
   if (!data) return null;
 
   return (
-    <Link href={href}>
+    <Link href={href} className="truncate block w-28">
       {data.title} - <span className="capitalize">{role}</span>
     </Link>
   );

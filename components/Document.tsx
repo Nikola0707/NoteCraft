@@ -14,10 +14,7 @@ function Document({ id }: { id: string }) {
   const [data, loading, error] = useDocumentData(doc(db, "documents", id));
   const [input, setInput] = useState("");
   const [isUpdating, startTransition] = useTransition();
-  console.log("data", data);
   const isOwner = useOwner();
-
-  console.log("isOwner", isOwner);
 
   const updateTitle = (e: FormEvent) => {
     e.preventDefault();
