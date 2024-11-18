@@ -1,6 +1,6 @@
 const DocumentsNotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="text-center">
         <h1 className="text-2xl font-semibold text-gray-800">
           No documents have been shared with you yet.

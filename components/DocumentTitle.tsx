@@ -1,25 +1,17 @@
 "use client";
 import { db } from "@/firebase";
 import { doc } from "firebase/firestore";
-import Link from "next/link";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 
-function DocumentTitle({
-  href,
-  id,
-  role,
-}: {
-  href: string;
-  id: string;
-  role: string;
-}) {
+function DocumentTitle({ id }: { id: string }) {
   const [data] = useDocumentData(doc(db, "documents", id));
-  if (!data) return null;
+  if (!data)
+    return <p className="font-bold text-lg text-gray-400">Loading...</p>;
 
   return (
-    <Link href={href} className="truncate block w-28">
-      {data.title} - <span className="capitalize">{role}</span>
-    </Link>
+    <h2 className="font-bold text-lg text-gray-800 truncate w-96">
+      {data.title}
+    </h2>
   );
 }
 

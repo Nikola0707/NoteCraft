@@ -13,7 +13,10 @@ import TabSelector from "@/components/TabSelector";
 import DocumentsNotFound from "@/components/DocumentsNotFound";
 
 interface RoomDocument extends DocumentData {
-  createdAt: string;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
   role: "owner" | "editor";
   roomId: string;
   userId: string;
@@ -38,7 +41,6 @@ export default function Home() {
         )
       : null
   );
-
   // Effect for grouping documents based on role
   useEffect(() => {
     if (!data) return;
@@ -94,9 +96,14 @@ export default function Home() {
     if (activeTab === "shared-with-me" && documentsToShow.length === 0) {
       return <DocumentsNotFound />;
     }
-
+    console.log("documentsToShow", documentsToShow);
     return documentsToShow.map((document) => (
-      <DocumentCard key={document.id} id={document.id} role={document.role} />
+      <DocumentCard
+        key={document.id}
+        id={document.id}
+        role={document.role}
+        createdAt={document.createdAt}
+      />
     ));
   }, [activeTab, groupedData]);
   return (
@@ -116,7 +123,7 @@ export default function Home() {
             {loading ? (
               <p>Loading documents...</p>
             ) : (
-              <div className="flex gap-2">{renderDocuments()}</div>
+              <div className="flex flex-col gap-2">{renderDocuments()}</div>
             )}
           </div>
         </div>

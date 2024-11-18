@@ -12,7 +12,7 @@ function NewDocumentButton() {
     startTransition(async () => {
       // The docID is the document id that we are getting from firebase
       const { docId } = await createNewDocument();
-      router.push(`/document/${docId}`);
+      // router.push(`/document/${docId}`);
     });
   };
 

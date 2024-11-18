@@ -73,9 +73,6 @@ function Editor() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex gap-2 justify-end mb-10">
-        {/* TranslateDOcument AI*/}
-        {/* ChatToDOcument AI*/}
-
         {/* Dark Mode Toggle*/}
         <Button className={style} onClick={() => setDarkMode((prev) => !prev)}>
           {darkMode ? <SunIcon /> : <MoonIcon />}

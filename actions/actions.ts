@@ -12,7 +12,6 @@ export async function createNewDocument() {
   //   The session clams are the custumized session token in clerk
   //   https://clerk.com/docs/backend-requests/making/custom-session-token?_gl=1*qnbkan*_gcl_au*MTM3NzI4OTA2NS4xNzIxNTc2ODEw*_ga*NDM4NDA3NTEzLjE3MjE1NzY4NzQ.*_ga_1WMF5X234K*MTcyMTgxNjk4MS4yLjEuMTcyMTgxNjk5Ni4wLjAuMA..
   const { sessionClaims } = await auth();
-  console.log("sessionClaims", sessionClaims?.email);
   // create a new document to the firebase
   const documentCollectionReference = adminDb.collection("documents");
   const today = new Date();
@@ -37,7 +36,6 @@ export async function createNewDocument() {
       createdAt: new Date(),
       roomId: documentReference.id,
     });
-  console.log("documentReference", documentReference.id);
   return {
     docId: documentReference.id,
   };
