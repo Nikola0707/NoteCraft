@@ -99,3 +99,23 @@ export async function inviteUserToDocument(roomId: string, email: string) {
     };
   }
 }
+
+export async function removeUserFromDocument(roomId: string, email: string) {
+  auth().protect(); // Ensure the user is authenticated
+  try {
+    await adminDb
+      .collection("users")
+      .doc(email)
+      .collection("rooms")
+      .doc(roomId)
+      .delete();
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+    };
+  }
+}
