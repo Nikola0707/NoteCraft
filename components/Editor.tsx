@@ -11,6 +11,7 @@ import "@blocknote/shadcn/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteEditor } from "@blocknote/core";
 import { stringToColor } from "@/lib/stringToColor";
+import TranslateDocument from "./TranslateDocument";
 
 type EditorProps = {
   document: Y.Doc;
@@ -73,6 +74,10 @@ function Editor() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex gap-2 justify-end mb-10">
+        {/* Translate document using AI */}
+
+        <TranslateDocument doc={document} />
+
         {/* Dark Mode Toggle*/}
         <Button className={style} onClick={() => setDarkMode((prev) => !prev)}>
           {darkMode ? <SunIcon /> : <MoonIcon />}

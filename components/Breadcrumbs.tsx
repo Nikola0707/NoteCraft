@@ -12,7 +12,7 @@ import {
 
 function Breadcrumbs() {
   const path = usePathname();
-  const pathSegments = path.split("/");
+  const pathSegments = path.split("/").filter(Boolean);
 
   return (
     <Breadcrumb>
