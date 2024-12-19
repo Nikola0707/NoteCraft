@@ -33,7 +33,8 @@ type Language =
   | "arabic"
   | "hindi"
   | "russian"
-  | "japanese";
+  | "japanese"
+  | "macedonian";
 
 const languages: Language[] = [
   "english",
@@ -46,6 +47,7 @@ const languages: Language[] = [
   "hindi",
   "russian",
   "japanese",
+  "macedonian",
 ];
 
 const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
